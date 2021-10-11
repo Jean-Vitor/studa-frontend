@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "studa-frontend",
+    "slug": "studa-frontend",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "studa-frontend"
+}
