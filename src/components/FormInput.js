@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 import styles from '../../styles.module.css';
 
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 import IconNome from '../../assets/icons/user.svg'
 import IconEmail from '../../assets/icons/email.svg'
 import IconSenha from '../../assets/icons/password.svg'

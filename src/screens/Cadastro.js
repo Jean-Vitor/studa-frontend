@@ -27,7 +27,7 @@ export default ({navigation : {navigate}}) => {
                     <View style={{alignItems:'center'}}>
                         <FormButton text="Cadastro" /> 
                         <Text style={{fontSize:15}, styles['font-default']}>Já possui uma conta?
-                            <Text style={{fontFamily:'Montserrat-Bold', color:'#E64949'}} onPress={() => navigate('Login')}> Entre aqui!</Text>
+                            <Text style={{fontFamily:'Montserrat_700Bold', color:'#E64949'}} onPress={() => navigate('Login')}> Entre aqui!</Text>
                         </Text>
                     </View>
                 </View>

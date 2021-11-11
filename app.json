@@ -1,15 +1,23 @@
 {
   "expo": {
-    "name": "studa-frontend",
-    "slug": "studa-frontend",
+    "name": "studafrontend",
+    "slug": "studafrontend",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ],
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "css", "svg"]
+      "sourceExts": [
+        "js",
+        "jsx",
+        "css",
+        "svg"
+      ]
+    },
+    "android": {
+      "package": "com.studafrontend"
     }
   },
-  "name": "studa-frontend"
+  "name": "studafrontend"
 }

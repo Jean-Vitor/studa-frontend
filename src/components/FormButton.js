@@ -4,13 +4,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 import styles from '../../styles.module.css'
 
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default ({text}) => {
     return (
         <View style={{width: (wp('100%') - 60)}}>
             <TouchableOpacity 
-                style={styles['gradientBtn-wrapper']}>
+                style={styles['gradientBtn-wrapper']}
+                activeOpacity={0.6}>
                 <LinearGradient 
                     style={styles['gradientBtn']}
                     colors={['#E64949', '#E67849']} >
