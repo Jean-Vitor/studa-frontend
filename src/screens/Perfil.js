@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, Modal, Text, TextInput, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TextInput, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
 
 import styles from '../../styles.module.css'
 
@@ -9,34 +9,12 @@ import IconSenha from '../../assets/icons/edit-pasw.svg'
 import IconLogOut from '../../assets/icons/log-out.svg'
 import IconArrow from '../../assets/icons/arrow.svg'
 
-export default () => {
-    // const [isVisible1, setVisible1] = useState(false)
-
-    // const ModalPic = () => {
-    //     return (
-    //         <Modal
-    //             isVisible={isVisible1}
-    //             onBackdropPress={() => setModalVisible(false)}
-    //         >
-    //             <View>
-    //                 <TextInput />
-    //             </View>
-    //         </Modal>
-    //     )
-    // }
-    
-    // const ModalName = () => {
-        
-    // }
-    
-    // const ModalPasw = () => {
-    
-    // }
+export default ({setVisible, setText, setScreen}) => {
 
     return (
             <View style={styles['drawer']}>
                 <View style={{alignItems:'center'}}>
-                    <TouchableOpacity style={{alignItems:'center', justifyContent:'center'}} activeOpacity={0.6}>
+                    <TouchableOpacity style={{alignItems:'center', justifyContent:'center'}} activeOpacity={0.6} onPress={() => (setVisible(true), setText("Alterar Foto de Perfil"), setScreen("Icon"))}>
                         <View style={styles['icon-parent']}>
                             <View style={styles['icon-outline']}/>
                             <Image source={require('../../assets/img/icon1.jpg')} style={styles['icon']} />
@@ -45,7 +23,7 @@ export default () => {
                     <Text style={styles['profile-name']}>Alberto da Silva</Text>
                     <Text style={[styles['font-default'], {marginBottom:40}]}>alberto.silva@gmail.com</Text>
 
-                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)}>
+                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)} onPress={() => (setVisible(true), setText("Alterar Nome"), setScreen("Nome"))}>
                         <View style={styles['profile-btn']}>
                             <IconNome width={30} height={30} fill="#000" />
                             <Text style={[styles['profile-btnText']]}>Editar nome de usuário</Text>
@@ -66,7 +44,7 @@ export default () => {
                             end={{x:1, y:1}} />
                     </View>
 
-                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)}>
+                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)} onPress={() => (setVisible(true), setText("Alterar Senha"), setScreen("Senha"))}>
                         <View style={styles['profile-btn']}>
                             <IconSenha width={30} height={30} fill="#000" />
                             <Text style={[styles['profile-btnText']]}>Editar senha</Text>
@@ -76,7 +54,7 @@ export default () => {
                 </View>
 
                 <View style={{alignItems:'center'}}>
-                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)}>
+                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)} onPress={() => (setVisible(true), setText("Deseja mesmo sair?"), setScreen("Sair"))}>
                         <View style={styles['profile-btn']}>
                             <IconLogOut width={30} height={30} fill="#000" />
                             <Text style={[styles['profile-btnText']]}>Sair</Text>

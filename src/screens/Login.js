@@ -19,8 +19,8 @@ export default ({navigation : {navigate}}) => {
                         <Logo width={wp('20%')} height={hp('20%')} />
                         <Text style={styles['title']}>Bem-vindo(a) de volta!</Text>
 
-                        <FormInput text="Email" type="email-address" />
-                        <FormInput text="Senha" />
+                        <FormInput text="Email" type="email-address" secure={false} />
+                        <FormInput text="Senha" secure={true} />
                     </View>
                     
                     <View style={{alignItems:'center'}}>

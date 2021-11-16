@@ -11,7 +11,7 @@ import IconSenha from '../../assets/icons/password.svg'
 import IconEyeOff from '../../assets/icons/eye-off.svg'
 import IconEye from '../../assets/icons/eye.svg'
 
-export default ({text, type}) => {
+export default ({text, type, secure}) => {
 
     const [isVisible, setVisible] = useState(true)
 
@@ -19,16 +19,13 @@ export default ({text, type}) => {
         setVisible(!isVisible)
     }
 
-    let icon
-    if (text === 'Email') {
-        icon = <IconEmail width={30} height={30} fill="#fff" />
+    const icons = {
+        Email: <IconEmail width={30} height={30} fill="#fff" />,
+        Nome: <IconNome width={30} height={30} fill="#fff" />,
+        Senha: <IconSenha width={30} height={30} fill="#fff" />
     }
-    else if (text === 'Senha') {
-        icon = <IconSenha width={30} height={30} fill="#fff" />
-    }
-    else if (text === 'Nome') {
-        icon = <IconNome width={30} height={30} fill="#fff" />
-    }
+    
+    const icon = icons[text];
 
     return (
         <View style={[styles['form-input'], {width: (wp('100%') - 60)}]}>
@@ -37,12 +34,10 @@ export default ({text, type}) => {
                 colors={['#E64949', '#E67849']}>
                     {icon}
             </LinearGradient>
-            <TextInput style={[styles['input'], styles['font-default']]} keyboardType={type || 'default'} secureTextEntry={isVisible} placeholder={text} placeholderTextColor='#646464' textAlign="center" />
-            {
-                (text === 'Senha' && isVisible) ? <IconEyeOff style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} /> :
-                (text === 'Senha' && !isVisible) ? <IconEye style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} /> :
-                false
-            }
+            <TextInput style={[styles['input'], styles['font-default']]} keyboardType={type || 'default'} secureTextEntry={secure && isVisible} placeholder={text} placeholderTextColor='#646464' textAlign="center" />
+            {(text === 'Senha' && isVisible) && <IconEyeOff style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} />}
+            
+            {(text === 'Senha' && !isVisible) && <IconEye style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} />}
         </View>
     )
 }

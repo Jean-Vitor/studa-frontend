@@ -6,11 +6,12 @@ import styles from '../../styles.module.css'
 import { LinearGradient } from 'expo-linear-gradient';
 import IconPlus from '../../assets/icons/plus.svg'
 
-export default () => {
+export default ({onPress, setText, setScreen}) => {
     return (
         <TouchableOpacity
             style={styles['list-addBtn']}
-            activeOpacity={0.8}>
+            activeOpacity={0.8}
+            onPress={() => (onPress(true), setText("Adicionar Item"), setScreen("ToDoAdd"))}>
             <LinearGradient 
                 style={{padding:10, borderRadius:20}}
                 colors={['#E64949', '#E67849']} >

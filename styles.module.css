@@ -295,3 +295,56 @@
     background-color: rgba(224, 224, 224, .3);
     border-radius: 20px;
 }
+
+
+/* Modal */
+
+.modal {
+    padding: 20px 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+.modal-title {
+    margin-bottom: 15px;
+    font-family: "Montserrat_700Bold";
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal-input {
+    margin: 5px 0;
+    justify-content: center;
+    border: 2px solid #bebebe;
+    border-radius: 10px;
+}
+.input-icon {
+    position: absolute;
+    left: 10px;
+}
+.input-text {
+    height: 60px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.modal-btn {
+    margin-top: 20px;
+    background-color: #e66049;
+    border-radius: 8px;
+}
+
+.icon-cell {
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.icon-selection {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}

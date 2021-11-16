@@ -16,7 +16,7 @@ import AppLoading from 'expo-app-loading';
 
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Button, Text, View, TouchableOpacity, DrawerLayoutAndroid
+  Button, Text, TextInput, View, TouchableOpacity, DrawerLayoutAndroid, Dimensions
 } from 'react-native';
 import { createSwitchNavigator } from "@react-navigation/compat";
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
@@ -43,6 +43,7 @@ import IconPerfil from '../assets/icons/user.svg'
 import styles from '../styles.module.css';
 import SwitchDarkMode from './components/SwitchDarkMode';
 import Perfil from './screens/Perfil';
+import ModalBox from './components/ModalBox';
 
 
 const AuthNavigator = createSwitchNavigator({
@@ -53,79 +54,97 @@ const AuthNavigator = createSwitchNavigator({
   initialRouteName: "Login"
 })
 
-const Tab = createBottomTabNavigator()
-const TabsNavigator = () => {
-  return (
-    <Tab.Navigator
-      initialRouteName="Inicio"
-      backBehavior="history"
-      tabBarOptions={{
-        showLabel:false,
-        activeTintColor:"#FFF",
-        inactiveTintColor:"#BB473A",
-        style:styles['mainBar']
-      }}
-    >
-      <Tab.Screen name="Inicio" component={Inicio}
-        options={{
-          tabBarIcon: ({size, color}) => {
-            return (
-              <IconInicio width={25} height={25} fill={color} />
-            )
-          }
-        }}
-      />
-      <Tab.Screen name="ToDo" component={ToDo} 
-        options={{
-          tabBarIcon: ({size, color}) => {
-            return (
-              <IconToDo width={25} height={25} fill={color} />
-            )
-          }
-        }}
-      />
-      <Tab.Screen name="Estatisticas" component={Estatisticas} 
-        options={{
-          tabBarIcon: ({size, color}) => {
-            return (
-              <IconEstatisticas width={25} height={25} fill={color} />
-            )
-          }
-        }}
-      />
-      <Tab.Screen name="Timer" component={Timer} 
-        options={{
-          tabBarIcon: ({size, color}) => {
-            return (
-              <IconTimer width={25} height={25} fill={color} />
-            )
-          }
-        }}
-      />
-      <Tab.Screen name="Calendario" component={Calendario} 
-        options={{
-          tabBarIcon: ({size, color}) => {
-            return (
-              <IconCalendario width={25} height={25} fill={color} />
-            )
-          }
-        }}
-      />
-    </Tab.Navigator>
-  )
-}
 
 
 export default function App() {
-  const [isAuth, setAuth] = useState(false)
+  const [isVisible, setVisible] = useState(false)
+  const [text, setText] = useState('')
+  const [screen, setScreen] = useState('')
+
+  //Tabs
+  const Tab = createBottomTabNavigator()
+  const TabsNavigator = () => {
+    return (
+      <Tab.Navigator
+        initialRouteName="Inicio"
+        backBehavior="history"
+        tabBarOptions={{
+          showLabel:false,
+          activeTintColor:"#FFF",
+          inactiveTintColor:"#BB473A",
+          style:styles['mainBar']
+        }}
+      >
+        <Tab.Screen name="Inicio" children={() => <Inicio />}
+          options={{
+            tabBarIcon: ({size, color}) => {
+              return (
+                <IconInicio width={25} height={25} fill={color} />
+              )
+            }
+          }}
+        />
+        <Tab.Screen name="ToDo" children={() => <ToDo setVisible={setVisible} setText={setText} setScreen={setScreen} />}
+          options={{
+            tabBarIcon: ({size, color}) => {
+              return (
+                <IconToDo width={25} height={25} fill={color} />
+              )
+            }
+          }}
+        />
+        <Tab.Screen name="Estatisticas" children={() => <Estatisticas />}
+          options={{
+            tabBarIcon: ({size, color}) => {
+              return (
+                <IconEstatisticas width={25} height={25} fill={color} />
+              )
+            }
+          }}
+        />
+        <Tab.Screen name="Timer" children={() => <Timer />}
+          options={{
+            tabBarIcon: ({size, color}) => {
+              return (
+                <IconTimer width={25} height={25} fill={color} />
+              )
+            }
+          }}
+        />
+        <Tab.Screen name="Calendario" children={() => <Calendario />} 
+          options={{
+            tabBarIcon: ({size, color}) => {
+              return (
+                <IconCalendario width={25} height={25} fill={color} />
+              )
+            }
+          }}
+        />
+      </Tab.Navigator>
+    )
+  }
+
 
   //Drawer
   const drawer = useRef(null);
   const navigationView = () => {
     return (
-      <Perfil />
+      <Perfil setVisible={setVisible} setText={setText} setScreen={setScreen} />
     )
   }
+
+
+  //Modal
+  const ModalComp = () => {
+    return <ModalBox 
+      isVisible={isVisible} 
+      setVisible={setVisible} 
+      text={text}
+      screen={screen}
+    />
+  }
+
+
 
 
   //Header
@@ -178,6 +197,8 @@ export default function App() {
   const navTheme = DefaultTheme;
   navTheme.colors.background = '#fff';
 
+  const [isAuth, setAuth] = useState(false)
+
   //Load Google Fonts
   let [fontsLoaded] = useFonts({
     Montserrat_700Bold,
@@ -200,8 +221,10 @@ export default function App() {
         />
         <NavigationContainer>
           {
-            (!isAuth) ? <MainNavigator /> :
-            <AuthNavigator />
+            (isVisible) && <ModalComp />
+          }
+          {
+            (!isAuth) ? <MainNavigator /> : <AuthNavigator />
           }
         </NavigationContainer>
       </>

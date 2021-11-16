@@ -1,62 +1,22 @@
 import React, { useState } from 'react'
-import { ScrollView, Text, TouchableOpacity, TouchableHighlight, View } from 'react-native'
+import { StatusBar } from 'expo-status-bar';
+import { ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight, View, Dimensions } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import dateFormat from 'dateformat'
+import dateFormat from '../config/dateFormat.js'
 
 import styles from '../../styles.module.css'
 
 import IconArrow from '../../assets/icons/arrow.svg'
 import IconFilter from '../../assets/icons/filter.svg'
-import IconEdit from '../../assets/icons/edit.svg'
-import IconTrash from '../../assets/icons/trash.svg'
-import ItemCheckBox from '../components/ItemCheckBox';
 import FloatingActionButton from '../components/FloatingActionButton';
-import Swipeable from 'react-native-swipeable';
 import SwipeableList from '../components/SwipeableList';
 
-export default () => {
-    //Date format
-    const today = new Date()
-    let month = dateFormat(today, "mmmm")
-    switch (month) {
-        case "January":
-            month = "Janeiro"
-            break;
-        case "February":
-            month = "Fevereiro"
-            break;
-        case "March":
-            month = "Março"
-            break;
-        case "April":
-            month = "Abril"
-            break;
-        case "May":
-            month = "Maio"
-            break;
-        case "June":
-            month = "Junho"
-            break;
-        case "July":
-            month = "Julho"
-            break;
-        case "August":
-            month = "Agosto"
-            break;
-        case "September":
-            month = "Setembro"
-            break;
-        case "October":
-            month = "Outubro"
-            break;
-        case "November":
-            month = "Novembro"
-            break;
-        case "December":
-            month = "Dezembro"
-            break;
-    }
-    const date = `${dateFormat(today, "d '\de' ") + month + dateFormat(today, " '\de' yyyy")}`
+export default ({setVisible, setText, setScreen}) => {
+    const today = new Date();
+    const month = dateFormat(today, "mmmm");
+    const year = dateFormat(today, " '\de' yyyy");
+    const day = dateFormat(today, "d '\de' ");
+    const date = `${day + month + year}`;
     
     const [enabled, setEnabled] = useState(true)
 
@@ -81,13 +41,11 @@ export default () => {
                         </View>
                     </View>
                     {
-                        (enabled) ? 
-                            <SwipeableList />
-                        : false
+                        (enabled) && <SwipeableList />
                     }
                 </View>
             </ScrollView>
-            <FloatingActionButton />
+            <FloatingActionButton onPress={setVisible} setText={setText} setScreen={setScreen} />
         </>
     )
 }   
