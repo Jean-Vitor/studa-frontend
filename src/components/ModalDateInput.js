@@ -3,13 +3,16 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native'
 
 import styles from '../../styles.module.css'
 
-export default ({content, setShow, setMode, mode}) => {
+export default ({content, setShow, setMode, mode, setDateChanged, dateChanged}) => {
 
     const [isFocused, setFocused] = useState(false)
 
     const showMode = (currentMode) => {
         setShow(true)
         setMode(currentMode)
+
+        if (setDateChanged !== undefined && dateChanged !== undefined)
+        setDateChanged(dateChanged)
     }
 
     return (

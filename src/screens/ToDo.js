@@ -41,11 +41,11 @@ export default ({setVisible, setText, setScreen}) => {
                         </View>
                     </View>
                     {
-                        (enabled) && <SwipeableList />
+                        (enabled) && <SwipeableList usage="checklist" />
                     }
                 </View>
             </ScrollView>
-            <FloatingActionButton onPress={setVisible} setText={setText} setScreen={setScreen} />
+            <FloatingActionButton onPress={setVisible} setText={setText} text="Adicionar Item" setScreen={setScreen} screen="ToDoAdd" />
         </>
     )
 }   

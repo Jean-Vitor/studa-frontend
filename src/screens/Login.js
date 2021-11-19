@@ -7,6 +7,7 @@ import styles from '../../styles.module.css';
 import Logo from '../../assets/icons/Logo.svg';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
+import { onSignIn } from '../config/auth'
 
 export default ({navigation : {navigate}}) => {
 
@@ -24,7 +25,7 @@ export default ({navigation : {navigate}}) => {
                     </View>
                     
                     <View style={{alignItems:'center'}}>
-                        <FormButton text="Login" /> 
+                        <FormButton text="Login" onPress={onSignIn} /> 
                         <Text style={{fontSize:15}, styles['font-default']}>Ainda não possui uma conta?
                             <Text style={{fontFamily:'Montserrat_700Bold', color:'#E64949'}} onPress={() => navigate('Cadastro')}> Cadastre-se!</Text>
                         </Text>

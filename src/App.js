@@ -18,6 +18,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Button, Text, TextInput, View, TouchableOpacity, DrawerLayoutAndroid, Dimensions
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSwitchNavigator } from "@react-navigation/compat";
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -44,6 +45,7 @@ import styles from '../styles.module.css';
 import SwitchDarkMode from './components/SwitchDarkMode';
 import Perfil from './screens/Perfil';
 import ModalBox from './components/ModalBox';
+import { isSignedIn } from './config/auth'
 
 
 const AuthNavigator = createSwitchNavigator({
@@ -111,7 +113,7 @@ export default function App() {
             }
           }}
         />
-        <Tab.Screen name="Calendario" children={() => <Calendario />} 
+        <Tab.Screen name="Calendario" children={() => <Calendario setVisible={setVisible} setText={setText} setScreen={setScreen} />} 
           options={{
             tabBarIcon: ({size, color}) => {
               return (
@@ -164,9 +166,6 @@ export default function App() {
               </View>
             </TouchableOpacity>
           )
-        }),
-        headerRight:(()=> {
-          return <SwitchDarkMode />
         })
       }
     }
@@ -197,7 +196,18 @@ export default function App() {
   const navTheme = DefaultTheme;
   navTheme.colors.background = '#fff';
 
+  
+  //Autenticação
   const [isAuth, setAuth] = useState(false)
+  
+  useEffect(() => {
+    isSignedIn()
+      .then(res => setAuth(res))
+      .catch(err => console.warn("Erro! " + err))
+  })
+
+  console.warn('Autenticado: ' + isAuth)
+
 
   //Load Google Fonts
   let [fontsLoaded] = useFonts({
@@ -224,7 +234,7 @@ export default function App() {
             (isVisible) && <ModalComp />
           }
           {
-            (!isAuth) ? <MainNavigator /> : <AuthNavigator />
+            (isAuth) ? <MainNavigator /> : <AuthNavigator />
           }
         </NavigationContainer>
       </>

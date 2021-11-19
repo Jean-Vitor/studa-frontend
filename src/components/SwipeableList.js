@@ -8,6 +8,8 @@ import Swipeable from 'react-native-swipeable';
 import IconEdit from '../../assets/icons/edit.svg'
 import IconTrash from '../../assets/icons/trash.svg'
 import ItemCheckBox from './ItemCheckBox';
+import ActivityItem from './ActivityItem';
+import colors from '../constants/colors'
 
 export default class SwipeableList extends Component {
     
@@ -32,10 +34,12 @@ export default class SwipeableList extends Component {
     ]
 
     render() {
+        const { usage } = this.props
 
         return (
             <View style={{paddingBottom:40}}>
-                <Swipeable style={{width:wp('100%')}} rightButtons={this.rightButtons}  
+                <Swipeable style={(usage === "checklist") && {width:wp('100%')}} rightButtons={this.rightButtons}  
+                    rightActionActivationDistance={200}
                     onRef = {ref => this.swipe = ref}
                     onRightButtonsOpenRelease = { (event, gestureState, swipe) => {
                         if (this.currentlyOpenSwipeable && this.currentlyOpenSwipeable !== swipe) {
@@ -44,10 +48,17 @@ export default class SwipeableList extends Component {
                         this.currentlyOpenSwipeable = swipe
                     }}
                 >
-                    <ItemCheckBox itemTxt="Item 1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" date="30 Set. 2021" hour="23:59" />
+                    {
+                        (usage === "checklist") ?
+                        <ItemCheckBox itemTxt="Item 1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" date="30 Set. 2021" hour="23:59" />
+                        :
+                        (usage === "studyCycle") ?
+                        <ActivityItem titulo="Ciclo 1" mainStat="12h às 20h" secondStat="Seg. a Sex." colorful={true} bgColor={colors[0]} />
+                        : false
+                    }
                 </Swipeable>
 
-                <Swipeable style={{width:wp('100%')}} rightButtons={this.rightButtons}  
+                <Swipeable style={(usage === "checklist") && {width:wp('100%')}} rightButtons={this.rightButtons}  
                     onRef = {ref => this.swipe = ref}
                     onRightButtonsOpenRelease = { (event, gestureState, swipe) => {
                         if (this.currentlyOpenSwipeable && this.currentlyOpenSwipeable !== swipe) {
@@ -56,10 +67,17 @@ export default class SwipeableList extends Component {
                         this.currentlyOpenSwipeable = swipe
                     }}
                 >
-                    <ItemCheckBox itemTxt="Item 2" date="30 Set. 2021" hour="23:59" />
+                    {
+                        (usage === "checklist") ?
+                        <ItemCheckBox itemTxt="Item 2" date="30 Set. 2021" hour="23:59" />
+                        :
+                        (usage === "studyCycle") ?
+                        <ActivityItem titulo="Ciclo 2" mainStat="12h às 20h" secondStat="Seg. a Sex." colorful={true} bgColor={colors[1]} />
+                        : false
+                    }
                 </Swipeable>
 
-                <Swipeable style={{width:wp('100%')}} rightButtons={this.rightButtons}  
+                <Swipeable style={(usage === "checklist") && {width:wp('100%')}} rightButtons={this.rightButtons}  
                     onRef = {ref => this.swipe = ref}
                     onRightButtonsOpenRelease = { (event, gestureState, swipe) => {
                         if (this.currentlyOpenSwipeable && this.currentlyOpenSwipeable !== swipe) {
@@ -68,10 +86,17 @@ export default class SwipeableList extends Component {
                         this.currentlyOpenSwipeable = swipe
                     }}
                 >
-                    <ItemCheckBox itemTxt="Item 3" date="30 Set. 2021" hour="23:59" />
+                    {
+                        (usage === "checklist") ?
+                        <ItemCheckBox itemTxt="Item 3" date="30 Set. 2021" hour="23:59" />
+                        :
+                        (usage === "studyCycle") ?
+                        <ActivityItem titulo="Ciclo 3" mainStat="12h às 20h" secondStat="Seg. a Sex." colorful={true} bgColor={colors[2]} />
+                        : false
+                    }
                 </Swipeable>
 
-                <Swipeable style={{width:wp('100%')}} rightButtons={this.rightButtons}  
+                <Swipeable style={(usage === "checklist") && {width:wp('100%')}} rightButtons={this.rightButtons}  
                     onRef = {ref => this.swipe = ref}
                     onRightButtonsOpenRelease = { (event, gestureState, swipe) => {
                         if (this.currentlyOpenSwipeable && this.currentlyOpenSwipeable !== swipe) {
@@ -80,7 +105,14 @@ export default class SwipeableList extends Component {
                         this.currentlyOpenSwipeable = swipe
                     }}
                 >
-                    <ItemCheckBox itemTxt="Item 4" date="30 Set. 2021" hour="23:59" />
+                    {
+                        (usage === "checklist") ?
+                        <ItemCheckBox itemTxt="Item 4" date="30 Set. 2021" hour="23:59" />
+                        :
+                        (usage === "studyCycle") ?
+                        <ActivityItem titulo="Ciclo 4" mainStat="12h às 20h" secondStat="Seg. a Sex." colorful={true} bgColor={colors[3]} />
+                        : false
+                    }
                 </Swipeable>
             </View>
         )

@@ -2,6 +2,8 @@ import React from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+import ActivityItem from '../components/ActivityItem';
+
 import styles from '../../styles.module.css'
 
 import {
@@ -30,29 +32,9 @@ export default () => {
             <View style={[styles['main-container'], styles['container-wrapper']]}>
                 <Text style={styles['sub-title']}>Próximas atividades</Text>
                 <View style={styles['actv-wrapper']}>
-                    <View style={styles['actv-item']}>
-                        <Text style={{fontFamily:'Montserrat_500Medium', fontSize:16, color:'#000'}}>Atividade 1</Text>
-                        <View style={[styles['item-stats'], {marginLeft:0}]}>
-                            <Text style={[styles['font-default'], styles['item-date']]}>30 Set. 2021</Text>
-                            <Text style={[styles['font-default'], {zIndex:-1}]}>23:59</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles['actv-item']}>
-                        <Text style={{fontFamily:'Montserrat_500Medium', fontSize:16, color:'#000'}}>Atividade 2</Text>
-                        <View style={[styles['item-stats'], {marginLeft:0}]}>
-                            <Text style={[styles['font-default'], styles['item-date']]}>30 Set. 2021</Text>
-                            <Text style={[styles['font-default'], {zIndex:-1}]}>23:59</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles['actv-item']}>
-                        <Text style={{fontFamily:'Montserrat_500Medium', fontSize:16, color:'#000'}}>Atividade 3</Text>
-                        <View style={[styles['item-stats'], {marginLeft:0}]}>
-                            <Text style={[styles['font-default'], styles['item-date']]}>30 Set. 2021</Text>
-                            <Text style={[styles['font-default'], {zIndex:-1}]}>23:59</Text>
-                        </View>
-                    </View>
+                    <ActivityItem titulo="Atividade 1" mainStat="30 Set. 2021" secondStat="23:59" />
+                    <ActivityItem titulo="Atividade 2" mainStat="30 Set. 2021" secondStat="23:59" />
+                    <ActivityItem titulo="Atividade 3" mainStat="30 Set. 2021" secondStat="23:59" />
                 </View>
                 
 

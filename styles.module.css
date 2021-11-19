@@ -35,12 +35,12 @@
     height: 90px;
 }
 .header-title {
+    margin-left: 70px;
     font-family: "MeriendaOne_400Regular";
     font-size: 30px;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
     letter-spacing: 4px;
-    flex: 1;
 }
 
 .profile-icon {
@@ -292,7 +292,6 @@
     padding-bottom: 6px;
     padding-right: 80px;
     width: 100%;
-    background-color: rgba(224, 224, 224, .3);
     border-radius: 20px;
 }
 
@@ -347,4 +346,19 @@
     width: 100%;
     height: 100%;
     background-color: rgb(255, 255, 255);
+}
+
+
+/* Bottom Sheet */
+
+.btsht-wrapper {
+    padding: 10px 30px;
+    padding-bottom: 80px;
+}
+
+.day-title {
+    margin-bottom: 20px;
+    font-family: "Montserrat_700Bold";
+    font-size: 20px;
+    color: #969fa5;
 }

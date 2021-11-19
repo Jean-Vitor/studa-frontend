@@ -6,12 +6,14 @@ import styles from '../../styles.module.css'
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default ({text}) => {
+export default ({text, onPress}) => {
     return (
         <View style={{width: (wp('100%') - 60)}}>
             <TouchableOpacity 
                 style={styles['gradientBtn-wrapper']}
-                activeOpacity={0.6}>
+                activeOpacity={0.6}
+                onPress={() => (onPress !== undefined) ? onPress() : null}
+                >
                 <LinearGradient 
                     style={styles['gradientBtn']}
                     colors={['#E64949', '#E67849']} >
