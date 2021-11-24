@@ -7,7 +7,7 @@ import dateFormat from '../config/dateFormat.js';
 
 import styles from '../../styles.module.css'
 
-export default ({cycle}) => {
+export default ({cycle, setField, fields}) => {
 
     const [date, setDate] = useState(null)
     const [mode, setMode] = useState('')
@@ -17,17 +17,39 @@ export default ({cycle}) => {
     const [endDate, setEndDate] = useState(null)
     const [dateChanged, setDateChanged] = useState('')
 
+    const formattedDate = dateFormat(new Date(), 'isoDateTime')
+    const dateToDb = formattedDate.substring(0, formattedDate.length - 5).concat('-0300')
+    console.log(dateToDb)
+    if (cycle) {
+        if (dateChanged == "inicial") {
+            setField(Object.assign(fields, {startDate: dateToDb}))
+        }
+        else {
+            setField(Object.assign(fields, {endDate: dateToDb}))
+        }
+    }
+    else {
+        setField(Object.assign(fields, {conclusionDate: dateToDb}))
+    }
+
     const onChange = (e, newDate) => {
+        const formattedDate = dateFormat(newDate, 'isoDateTime')
+        const dateToDb = formattedDate.substring(0, formattedDate.length - 5).concat('-0300')
+        console.log(dateToDb)
+
         if (cycle) {
             if (dateChanged == "inicial") {
                 setInitDate(newDate)
+                setField(Object.assign(fields, {startDate: dateToDb}))
             }
             else {
                 setEndDate(newDate)
+                setField(Object.assign(fields, {endDate: dateToDb}))
             }
         }
         else {
             setDate(newDate)
+            setField(Object.assign(fields, {conclusionDate: dateToDb}))
         }
     }
 

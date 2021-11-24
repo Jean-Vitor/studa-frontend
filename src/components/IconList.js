@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import { Image, Text, View, TouchableOpacity } from 'react-native'
 import files from '../constants/files.js'
 
 import styles from '../../styles.module.css'
+import { AuthContext } from '../context/auth.context.js'
 
 export default class IconList extends Component {
     
     state = {
-        value: null,
+        value: 1,
     }
 
     render() {
-        const { options } = this.props
+        const { options, setIcon } = this.props
         const { value } = this.state
 
         return (
@@ -28,6 +29,7 @@ export default class IconList extends Component {
                                         this.setState({
                                             value: key,
                                         })
+                                        setIcon(key)
                                     }}
                                 >
                                     <Image source={file} style={{width:80, height:80, borderRadius:5}} />

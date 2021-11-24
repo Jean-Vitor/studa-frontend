@@ -7,25 +7,25 @@ import styles from '../../styles.module.css';
 import Logo from '../../assets/icons/Logo.svg';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import { onSignIn } from '../config/auth'
 
 export default ({navigation : {navigate}}) => {
 
+    const [fields, setFields] = useState({})
+
     return (
         <KeyboardAvoidingView>
-            {/* Acho que não precisa */}
             <ScrollView>
                 <View style={[styles['main-container'], styles['single-container'], {height:hp('100%')}]}>
                     <View style={{alignItems:'center'}}>
                         <Logo width={wp('20%')} height={hp('20%')} />
                         <Text style={styles['title']}>Bem-vindo(a) de volta!</Text>
 
-                        <FormInput text="Email" type="email-address" secure={false} />
-                        <FormInput text="Senha" secure={true} />
+                        <FormInput text="Email" type="email-address" secure={false} setField={setFields} fields={fields} />
+                        <FormInput text="Senha" secure={true} setField={setFields} fields={fields} />
                     </View>
                     
                     <View style={{alignItems:'center'}}>
-                        <FormButton text="Login" onPress={onSignIn} /> 
+                        <FormButton text="Login" fields={fields} />
                         <Text style={{fontSize:15}, styles['font-default']}>Ainda não possui uma conta?
                             <Text style={{fontFamily:'Montserrat_700Bold', color:'#E64949'}} onPress={() => navigate('Cadastro')}> Cadastre-se!</Text>
                         </Text>

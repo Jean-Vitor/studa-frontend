@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Image, Text, TextInput, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
 
 import styles from '../../styles.module.css'
@@ -8,8 +8,13 @@ import IconNome from '../../assets/icons/edit-name.svg'
 import IconSenha from '../../assets/icons/edit-pasw.svg'
 import IconLogOut from '../../assets/icons/log-out.svg'
 import IconArrow from '../../assets/icons/arrow.svg'
+import files from '../constants/files';
+import { AuthContext } from '../context/auth.context';
 
 export default ({setVisible, setText, setScreen}) => {
+
+    const { user } = useContext(AuthContext)
+    const { icon } = useContext(AuthContext)
 
     return (
             <View style={styles['drawer']}>
@@ -17,11 +22,11 @@ export default ({setVisible, setText, setScreen}) => {
                     <TouchableOpacity style={{alignItems:'center', justifyContent:'center'}} activeOpacity={0.6} onPress={() => (setVisible(true), setText("Alterar Foto de Perfil"), setScreen("Icon"))}>
                         <View style={styles['icon-parent']}>
                             <View style={styles['icon-outline']}/>
-                            <Image source={require('../../assets/img/icon1.jpg')} style={styles['icon']} />
+                            <Image source={files[icon]} style={styles['icon']} />
                         </View>
                     </TouchableOpacity>
-                    <Text style={styles['profile-name']}>Alberto da Silva</Text>
-                    <Text style={[styles['font-default'], {marginBottom:40}]}>alberto.silva@gmail.com</Text>
+                    <Text style={styles['profile-name']}>{user.name}</Text>
+                    <Text style={[styles['font-default'], {marginBottom:40}]}>{user.email}</Text>
 
                     <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0, 0, 0, .2)', false)} onPress={() => (setVisible(true), setText("Alterar Nome"), setScreen("Nome"))}>
                         <View style={styles['profile-btn']}>

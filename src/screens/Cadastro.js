@@ -10,22 +10,23 @@ import FormButton from '../components/FormButton';
 
 export default ({navigation : {navigate}}) => {
 
+    const [fields, setFields] = useState({})
+
     return (
         <KeyboardAvoidingView>
-            {/* Acho que não precisa */}
             <ScrollView>
                 <View style={[styles['main-container'], styles['single-container'], {height:hp('100%')}]}>
                     <View style={{alignItems:'center'}}>
                         <Logo width={wp('20%')} height={hp('20%')} />
                         <Text style={styles['title']}>Seja bem-vindo(a)!</Text>
 
-                        <FormInput text="Nome" secure={false} />
-                        <FormInput text="Email" type="email-address" secure={false} />
-                        <FormInput text="Senha" secure={true} />
+                        <FormInput text="Nome" secure={false} setField={setFields} fields={fields} />
+                        <FormInput text="Email" type="email-address" secure={false} setField={setFields} fields={fields} />
+                        <FormInput text="Senha" secure={true} setField={setFields} fields={fields} />
                     </View>
                     
                     <View style={{alignItems:'center'}}>
-                        <FormButton text="Cadastro" /> 
+                        <FormButton text="Cadastro" fields={fields} /> 
                         <Text style={{fontSize:15}, styles['font-default']}>Já possui uma conta?
                             <Text style={{fontFamily:'Montserrat_700Bold', color:'#E64949'}} onPress={() => navigate('Login')}> Entre aqui!</Text>
                         </Text>

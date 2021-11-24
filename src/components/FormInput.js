@@ -11,7 +11,7 @@ import IconSenha from '../../assets/icons/password.svg'
 import IconEyeOff from '../../assets/icons/eye-off.svg'
 import IconEye from '../../assets/icons/eye.svg'
 
-export default ({text, type, secure}) => {
+export default ({text, type, secure, setField, fields}) => {
 
     const [isVisible, setVisible] = useState(true)
 
@@ -26,6 +26,7 @@ export default ({text, type, secure}) => {
     }
     
     const icon = icons[text];
+    const param = (text == "Email") ? 'email' : (text == "Nome") ? 'name' : 'password';
 
     return (
         <View style={[styles['form-input'], {width: (wp('100%') - 60)}]}>
@@ -34,7 +35,8 @@ export default ({text, type, secure}) => {
                 colors={['#E64949', '#E67849']}>
                     {icon}
             </LinearGradient>
-            <TextInput style={[styles['input'], styles['font-default']]} keyboardType={type || 'default'} secureTextEntry={secure && isVisible} placeholder={text} placeholderTextColor='#646464' textAlign="center" />
+            <TextInput style={[styles['input'], styles['font-default']]} keyboardType={type || 'default'} secureTextEntry={secure && isVisible} placeholder={text} placeholderTextColor='#646464' textAlign="center" 
+            onChangeText={(txt) => setField(Object.assign(fields, {[param]: txt}))}/>
             {(text === 'Senha' && isVisible) && <IconEyeOff style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} />}
             
             {(text === 'Senha' && !isVisible) && <IconEye style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} />}

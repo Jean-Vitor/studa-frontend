@@ -8,7 +8,7 @@ import IconSenha from '../../assets/icons/edit-pasw.svg'
 import IconEyeOff from '../../assets/icons/eye-off.svg'
 import IconEye from '../../assets/icons/eye.svg'
 
-export default ({screen, text, secure}) => {
+export default ({screen, text, secure, setField, fields}) => {
 
     const [isVisible, setVisible] = useState(true)
     const [isFocused, setFocused] = useState(false)
@@ -25,10 +25,13 @@ export default ({screen, text, secure}) => {
         icon = <IconSenha style={styles['input-icon']} width={30} height={30} fill={(isFocused) ? "#e66049" : "#bebebe"} />
     }
 
+    const param = (text == "Título") ? 'title' : (text == "Descrição") ? 'description' : (text == "Novo Nome") ? 'name' : 'password';
+
     return (
         <View style={[styles['modal-input'], isFocused && {borderColor:"#e66049"}]}>
             {icon}
-            <TextInput style={[styles['input'], styles['font-default'], {paddingRight:60, height:60}]} onPressIn={() => setFocused(true)} onEndEditing={() => setFocused(false)} keyboardType="default" secureTextEntry={secure && isVisible} placeholder={text} placeholderTextColor='#646464' textAlign="left" />
+            <TextInput style={[styles['input'], styles['font-default'], {paddingRight:60, height:60}]} onPressIn={() => setFocused(true)} onEndEditing={() => setFocused(false)} keyboardType="default" secureTextEntry={secure && isVisible} placeholder={text} placeholderTextColor='#646464' textAlign="left" 
+            onChangeText={(txt) => setField(Object.assign(fields, {[param]: txt}))}/>
             {(screen === 'Senha' && isVisible) && <IconEyeOff style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} />}
             {(screen === 'Senha' && !isVisible) && <IconEye style={styles['passIcon']} width={30} height={30} fill="#9B9B9B" onPress={handlePasswordVisibility} />}
         </View>

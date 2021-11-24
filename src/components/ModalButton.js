@@ -1,16 +1,19 @@
 import React from 'react'
 import { Text, View, TouchableNativeFeedback } from 'react-native'
 
+import { add } from '../config/actions'
+
 import styles from '../../styles.module.css'
 
-export default ({text, outline, onPress, onSubmit}) => {
+export default ({text, outline, onPress, onSubmit, action, fields}) => {
     return (
         <View style={[styles['modal-btn'], outline && {backgroundColor:'transparent', borderColor:'#e66049', borderWidth:2}]}>
             <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(outline ? 'rgba(230, 96, 73, .2)' : 'rgba(0, 0, 0, .2)', true)} 
                 onPress={
                     () => (
                         (onPress !== undefined) && onPress(),
-                        (onSubmit !== undefined) && onSubmit(false)
+                        (onSubmit !== undefined) && onSubmit(false),
+                        (text === "Salvar") && add(action, fields)
                     )
                 }
             >

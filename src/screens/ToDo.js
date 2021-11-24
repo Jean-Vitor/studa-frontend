@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, Text, TextInput, TouchableOpacity, TouchableHighlight, View, Dimensions } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -10,6 +10,7 @@ import IconArrow from '../../assets/icons/arrow.svg'
 import IconFilter from '../../assets/icons/filter.svg'
 import FloatingActionButton from '../components/FloatingActionButton';
 import SwipeableList from '../components/SwipeableList';
+import { get } from '../config/actions'
 
 export default ({setVisible, setText, setScreen}) => {
     const today = new Date();
@@ -19,6 +20,15 @@ export default ({setVisible, setText, setScreen}) => {
     const date = `${day + month + year}`;
     
     const [enabled, setEnabled] = useState(true)
+    const [tasks, setTasks] = useState([])
+
+    useEffect(() => {
+        const loadTasks = async () => {
+            const data = await get("task")
+            setTasks(data)
+        }
+        loadTasks()
+    }, [])
 
     return (
         <>
@@ -29,7 +39,7 @@ export default ({setVisible, setText, setScreen}) => {
 
                     <View style={styles['list-header']}>
                         <Text style={[styles['font-default'], {fontSize:20}]}>Lista</Text>
-                        <Text style={[styles['font-default'], styles['list-count'], {fontSize:18}]}>10</Text>
+                        <Text style={[styles['font-default'], styles['list-count'], {fontSize:18}]}>{Object.keys(tasks).length}</Text>
                         <View style={styles['list-headerIcons']}>
                             <TouchableOpacity hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
                                 <IconFilter width={18} height={18} fill="#7B7B7B" />
@@ -41,7 +51,7 @@ export default ({setVisible, setText, setScreen}) => {
                         </View>
                     </View>
                     {
-                        (enabled) && <SwipeableList usage="checklist" />
+                        (enabled) && <SwipeableList usage="checklist" tasks={tasks} />
                     }
                 </View>
             </ScrollView>
